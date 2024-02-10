@@ -1,3 +1,6 @@
+/**
+ * Definition for singly-linked list, given in the problem statement.
+ */
 class ListNode {
     int val;
     ListNode next;
@@ -11,7 +14,31 @@ class ListNode {
     }
 }
 
+/**
+ * Problem description:
+ * Given two non-empty linked lists representing two non-negative integers.
+ * The digits are stored in reverse order, and each of their nodes contains a single digit.
+ * Add the two numbers and return the sum as a linked list.
+ * Assume the two numbers do not contain any leading zero,
+ * except the number 0 itself.
+
+ * Example1:
+ * list1    = 2 -> 4 -> 3
+ * list2    = 5 -> 6 -> 4
+ * result   = 7 -> 0 -> 8
+
+ * Example2:
+ * list1    = 9 -> 9 -> 9 -> 9 -> 9 -> 9 -> 9
+ * list2    = 9 -> 9 -> 9 -> 9
+ * result   = 8 -> 9 -> 9 -> 9 -> 0 -> 0 -> 0 -> 1
+ */
 public class AddTwoNumbers {
+
+    /**
+     * Given two linked list, this method returns
+     * a new linked list with their total values.
+     * @return the head of the new linked list
+     */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int carry_over = 0;
         int total = l1.val + l2.val;
@@ -26,7 +53,16 @@ public class AddTwoNumbers {
         return result;
     }
 
-    public void insertNewNode(ListNode l1, ListNode l2, ListNode result, int carry_over) {
+    /**
+     * Recursive helper method for addTwoNumbers(l1, l2).
+     * This method creates a node and appends it
+     * at the end of the new linked list.
+     * @param l1 the linked list
+     * @param l2 the other linked list
+     * @param result the resulting linked list
+     * @param carry_over value to be added to the next recursive call
+     */
+    private void insertNewNode(ListNode l1, ListNode l2, ListNode result, int carry_over) {
         if (l1 == null && l2 == null && carry_over == 0) return;
 
         int val1 = 0, val2 = 0;
@@ -58,10 +94,11 @@ public class AddTwoNumbers {
 
     /**
      * Parse an array of integers to a ListNode object.
+     * Use this method for testing.
      * @param arr the array
      * @return the head of the created ListNode
      */
-    ListNode getNode(int[] arr) {
+    ListNode parseArray(int[] arr) {
         ListNode head = new ListNode(arr[0]);
         ListNode tmp = head;
         for (int i = 1; i < arr.length; i++) {
@@ -71,14 +108,13 @@ public class AddTwoNumbers {
         return head;
     }
 
+
     public static void main(String[] args) {
         AddTwoNumbers atn = new AddTwoNumbers();
-        ListNode n1 = atn.getNode(new int[]{5,6});
-        ListNode n2 = atn.getNode(new int[]{5,4,9});
+        ListNode n1 = atn.parseArray
+                (new int[]{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1});
+        ListNode n2 = atn.parseArray(new int[]{5,6,4});
         ListNode result = atn.addTwoNumbers(n1,n2);
         System.out.println(result);
-
-//        new int[]{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}
-//        new int[]{5,6,4}
     }
 }
